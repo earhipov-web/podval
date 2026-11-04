@@ -112,6 +112,62 @@ export default function Home() {
           </div>
         </div>
 
+        {/* ---------- Deals ---------- */}
+        <section aria-labelledby="deals-title" className="wrap section">
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <Reveal as="p" from="left" className="eyebrow">
+                Выгодно
+              </Reveal>
+              <Reveal as="h2" from="left" order={1} id="deals-title" className="mt-3 max-w-[20ch]">
+                Самые выгодные позиции меню
+              </Reveal>
+            </div>
+            <Reveal from="right">
+              <Link href="/menu" className="btn btn-ghost">
+                Всё меню <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </Reveal>
+          </div>
+          <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {deals.map((d, i) => {
+              const item = itemById(d.id)!;
+              const save = d.was - item.price;
+              return (
+                <Reveal as="li" key={d.id} from={i < 2 ? "left" : "right"} order={i % 2}>
+                  <article className="group relative flex h-full flex-col overflow-hidden rounded-tile bg-surface shadow-[inset_0_0_0_1px_#2e2540] transition-[box-shadow,transform] duration-500 hover:-translate-y-1 hover:shadow-[inset_0_0_0_1px_rgb(255_176_59/0.6),0_24px_60px_-24px_rgb(255_160_40/0.5)]">
+                    <div className="relative aspect-[4/3] overflow-hidden bg-grey">
+                      {item.img ? (
+                        <Image src={item.img} alt={item.name} fill sizes="(min-width: 1024px) 300px, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                      ) : (
+                        <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_50%_40%,#3b1468,#110c19_70%)]">
+                          <span className="neon-violet font-display text-[44px] font-bold">{item.tag ?? item.name}</span>
+                        </div>
+                      )}
+                      <span className="absolute left-3 top-3 rounded-full bg-ochre px-3 py-1 text-[13px] font-bold text-black shadow-[0_0_16px_rgb(255_176_59/0.7)]">
+                        −{rub(save)}
+                      </span>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2 p-5">
+                      <h3 className="text-[19px]">{d.title}</h3>
+                      <p className="text-small text-soft">{d.why}</p>
+                      <div className="mt-auto flex flex-col gap-3 pt-4">
+                        <p className="flex items-baseline gap-3 whitespace-nowrap">
+                          <span className="font-display text-[26px] font-bold tabular-nums">{rub(item.price)}</span>
+                          <s className="text-soft tabular-nums">{rub(d.was)}</s>
+                        </p>
+                        <div className="[&>*]:w-full [&>div]:justify-between">
+                          <AddToCart item={item} wide />
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </Reveal>
+              );
+            })}
+          </ul>
+        </section>
+
         {/* ---------- Zones ---------- */}
         <section aria-labelledby="zones-title" className="wrap section">
           <div className="max-w-[760px]">
@@ -188,62 +244,6 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
-        </section>
-
-        {/* ---------- Deals ---------- */}
-        <section aria-labelledby="deals-title" className="wrap section">
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <Reveal as="p" from="left" className="eyebrow">
-                Выгодно
-              </Reveal>
-              <Reveal as="h2" from="left" order={1} id="deals-title" className="mt-3 max-w-[20ch]">
-                Самые выгодные позиции меню
-              </Reveal>
-            </div>
-            <Reveal from="right">
-              <Link href="/menu" className="btn btn-ghost">
-                Всё меню <ArrowRight className="size-4" aria-hidden="true" />
-              </Link>
-            </Reveal>
-          </div>
-          <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {deals.map((d, i) => {
-              const item = itemById(d.id)!;
-              const save = d.was - item.price;
-              return (
-                <Reveal as="li" key={d.id} from={i < 2 ? "left" : "right"} order={i % 2}>
-                  <article className="group relative flex h-full flex-col overflow-hidden rounded-tile bg-surface shadow-[inset_0_0_0_1px_#2e2540] transition-[box-shadow,transform] duration-500 hover:-translate-y-1 hover:shadow-[inset_0_0_0_1px_rgb(255_176_59/0.6),0_24px_60px_-24px_rgb(255_160_40/0.5)]">
-                    <div className="relative aspect-[4/3] overflow-hidden bg-grey">
-                      {item.img ? (
-                        <Image src={item.img} alt={item.name} fill sizes="(min-width: 1024px) 300px, 50vw" className="object-cover transition-transform duration-700 group-hover:scale-105" />
-                      ) : (
-                        <div className="grid h-full place-items-center bg-[radial-gradient(circle_at_50%_40%,#3b1468,#110c19_70%)]">
-                          <span className="neon-violet font-display text-[44px] font-bold">{item.tag ?? item.name}</span>
-                        </div>
-                      )}
-                      <span className="absolute left-3 top-3 rounded-full bg-ochre px-3 py-1 text-[13px] font-bold text-black shadow-[0_0_16px_rgb(255_176_59/0.7)]">
-                        −{rub(save)}
-                      </span>
-                    </div>
-                    <div className="flex flex-1 flex-col gap-2 p-5">
-                      <h3 className="text-[19px]">{d.title}</h3>
-                      <p className="text-small text-soft">{d.why}</p>
-                      <div className="mt-auto flex flex-col gap-3 pt-4">
-                        <p className="flex items-baseline gap-3 whitespace-nowrap">
-                          <span className="font-display text-[26px] font-bold tabular-nums">{rub(item.price)}</span>
-                          <s className="text-soft tabular-nums">{rub(d.was)}</s>
-                        </p>
-                        <div className="[&>*]:w-full [&>div]:justify-between">
-                          <AddToCart item={item} wide />
-                        </div>
-                      </div>
-                    </div>
-                  </article>
-                </Reveal>
-              );
-            })}
-          </ul>
         </section>
 
         {/* ---------- Reviews ---------- */}
