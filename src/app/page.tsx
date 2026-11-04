@@ -132,7 +132,6 @@ export default function Home() {
           <ul className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {deals.map((d, i) => {
               const item = itemById(d.id)!;
-              const save = d.was - item.price;
               return (
                 <Reveal as="li" key={d.id} from={i < 2 ? "left" : "right"} order={i % 2}>
                   <article className="group relative flex h-full flex-col overflow-hidden rounded-tile bg-surface shadow-[inset_0_0_0_1px_#2e2540] transition-[box-shadow,transform] duration-500 hover:-translate-y-1 hover:shadow-[inset_0_0_0_1px_rgb(255_176_59/0.6),0_24px_60px_-24px_rgb(255_160_40/0.5)]">
@@ -144,9 +143,6 @@ export default function Home() {
                           <span className="neon-violet font-display text-[44px] font-bold">{item.tag ?? item.name}</span>
                         </div>
                       )}
-                      <span className="absolute left-3 top-3 rounded-full bg-ochre px-3 py-1 text-[13px] font-bold text-black shadow-[0_0_16px_rgb(255_176_59/0.7)]">
-                        −{rub(save)}
-                      </span>
                     </div>
                     <div className="flex flex-1 flex-col gap-2 p-5">
                       <h3 className="text-[19px]">{d.title}</h3>
