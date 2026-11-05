@@ -55,53 +55,47 @@ export default function Home() {
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(7_5_11/0.35)_0%,rgb(7_5_11/0.8)_45%,#07050b_90%)] lg:bg-[linear-gradient(90deg,#07050b_8%,rgb(7_5_11/0.75)_45%,rgb(7_5_11/0.3)_100%)]" />
             <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-ground to-transparent" />
           </div>
-          <div className="wrap grid items-center gap-5 pb-5 pt-3 lg:min-h-[min(92svh,900px)] lg:grid-cols-12 lg:gap-10 lg:py-12">
+          <div className="wrap grid min-h-[min(92svh,900px)] items-center gap-10 py-12 lg:grid-cols-12">
             <div className="lg:col-span-7">
               <p className="eyebrow in-left">Кальян-бар · Казань, центр</p>
-              <h1 id="hero-title" className="in-left mt-2 text-h1 lg:mt-4" style={{ ["--i" as string]: 1 }}>
+              <h1 id="hero-title" className="in-left mt-5 text-h1" style={{ ["--i" as string]: 1 }}>
                 Здесь <span className="neon-violet flicker">никогда</span> не&nbsp;бывает скучно
               </h1>
-              <p className="in-left mt-3 max-w-[48ch] text-[15px] leading-snug text-soft lg:mt-6 lg:text-lead lg:leading-normal" style={{ ["--i" as string]: 2 }}>
-                Бар, уютный зал, PlayStation 5, DJ-сеты и караоке. Заходите одни или всей компанией.
+
+              {/* phones and tablets: the same photo collage as on wide screens, right under the heading */}
+              <div className="relative mx-auto mt-6 aspect-[6/7] w-full max-w-[520px] lg:hidden">
+                <div className="frame in-right absolute right-0 top-0 h-[71%] w-[78%]" style={{ ["--i" as string]: 2 }}>
+                  <Image src="/photos/bar-sign.webp" alt="Неоновая вывеска bar над барной стойкой" fill priority sizes="(min-width: 640px) 400px, 78vw" className="object-cover" />
+                </div>
+                <div className="frame in-right absolute bottom-0 left-0 h-[45%] w-[62%] shadow-[0_30px_60px_rgb(0_0_0/0.6)]" style={{ ["--i" as string]: 3 }}>
+                  <Image src="/photos/drinks.webp" alt="Три ярких коктейля на барной стойке" fill priority sizes="(min-width: 640px) 320px, 62vw" className="object-cover" />
+                </div>
+              </div>
+              <p className="lead in-left mt-6 max-w-[48ch] text-soft" style={{ ["--i" as string]: 2 }}>
+                Бар с неоновой вывеской, уютный гостевой зал, PlayStation 5, DJ-сеты и караоке. Заходите одни или
+                всей компанией: занятие найдётся каждому.
               </p>
-              <div className="in-left mt-4 grid grid-cols-2 gap-2 sm:flex sm:flex-wrap sm:gap-3 lg:mt-9" style={{ ["--i" as string]: 3 }}>
-                <Link href="/booking" className="btn btn-ochre !px-3 sm:!px-[1.4em]">
-                  <span className="sm:hidden">Бронь стола</span>
-                  <span className="hidden sm:inline">Забронировать стол</span>
+              <div className="in-left mt-9 flex flex-wrap gap-3" style={{ ["--i" as string]: 3 }}>
+                <Link href="/booking" className="btn btn-ochre">
+                  Забронировать стол
                 </Link>
-                <Link href="/menu" className="btn btn-ghost !px-3 sm:!px-[1.4em]">
-                  Меню <ArrowRight className="size-4" aria-hidden="true" />
+                <Link href="/menu" className="btn btn-ghost">
+                  Смотреть меню <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>
               </div>
-
-              {/* phones: three photos in one strip instead of the large collage */}
-              <ul className="in-up mt-4 grid grid-cols-3 gap-1.5 lg:hidden" style={{ ["--i" as string]: 4 }}>
-                {[
-                  { src: "/photos/bar-sign.webp", alt: "Неоновая вывеска bar над барной стойкой" },
-                  { src: "/photos/drinks.webp", alt: "Три ярких коктейля на барной стойке" },
-                  { src: "/photos/ps5.webp", alt: "Зона PlayStation 5 на фоне стены-коллажа" },
-                ].map((p) => (
-                  <li key={p.src}>
-                    <Link href="/gallery" className="relative block aspect-[3/4] overflow-hidden rounded-xl bg-surface shadow-[inset_0_0_0_1px_#2e2540]">
-                      <Image src={p.src} alt={p.alt} fill priority sizes="34vw" className="object-cover" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-
-              <ul className="in-up mt-3 grid max-w-[620px] grid-cols-4 gap-1.5 sm:gap-2 lg:mt-12" style={{ ["--i" as string]: 5 }}>
+              <ul className="in-up mt-12 grid max-w-[620px] grid-cols-2 gap-2 sm:grid-cols-4" style={{ ["--i" as string]: 4 }}>
                 {[
                   { v: club.rating, l: `${club.ratings} оценки`, star: true },
-                  { v: "04:00", l: "до утра в пт–сб" },
+                  { v: "до 04:00", l: "в пт и сб" },
                   { v: "PS5", l: "и настолки" },
                   { v: "18+", l: "только взрослые" },
                 ].map((f) => (
-                  <li key={f.l} className="rounded-xl bg-surface/70 px-2 py-2 backdrop-blur-md shadow-[inset_0_0_0_1px_#2e2540] sm:rounded-2xl sm:px-4 sm:py-3">
-                    <p className="flex items-center gap-1 whitespace-nowrap font-sans text-[15px] font-bold sm:text-[18px]">
-                      {f.star && <Star className="size-3.5 fill-ochre text-ochre sm:size-4" aria-hidden="true" />}
+                  <li key={f.l} className="rounded-2xl bg-surface/70 px-4 py-3 backdrop-blur-md shadow-[inset_0_0_0_1px_#2e2540]">
+                    <p className="flex items-center gap-1.5 whitespace-nowrap font-display text-[18px] font-bold">
+                      {f.star && <Star className="size-4 fill-ochre text-ochre" aria-hidden="true" />}
                       {f.v}
                     </p>
-                    <p className="text-[11px] leading-tight text-soft sm:text-small">{f.l}</p>
+                    <p className="text-small text-soft">{f.l}</p>
                   </li>
                 ))}
               </ul>
