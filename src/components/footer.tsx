@@ -74,6 +74,8 @@ export function Contacts({ withMap = true }: { withMap?: boolean }) {
               src={club.mapWidget}
               title={`PODVAL на карте: ${club.addressFull}`}
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"
               className="absolute inset-0 h-full w-full border-0 [filter:invert(0.92)_hue-rotate(200deg)_saturate(0.7)_brightness(0.9)]"
             />
           </Reveal>
