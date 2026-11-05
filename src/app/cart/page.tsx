@@ -64,7 +64,7 @@ export default function CartPage() {
                 </dl>
                 <div className="mt-5 flex items-baseline justify-between border-t border-line pt-5">
                   <span className="font-semibold">К оплате</span>
-                  <span className="neon-violet font-display text-[32px] font-bold tabular-nums">{rub(total)}</span>
+                  <span className="neon-violet font-sans text-[32px] font-bold tabular-nums">{rub(total)}</span>
                 </div>
                 <Link href="/checkout" className="btn btn-neon mt-6 w-full">
                   Оплатить <ArrowRight className="size-4" aria-hidden="true" />

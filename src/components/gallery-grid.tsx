@@ -51,7 +51,7 @@ export function GalleryGrid() {
 
   return (
     <>
-      <div className="sticky top-[72px] z-30 -mx-[var(--gutter)] bg-ground/85 px-[var(--gutter)] py-3 backdrop-blur-xl">
+      <div className="sticky top-[72px] z-30 -mx-[var(--gutter)] bg-ground/85 px-[var(--gutter)] py-2 backdrop-blur-xl sm:py-3">
         <div className="flex gap-1 overflow-x-auto [scrollbar-width:none]" role="group" aria-label="Фильтр по залам">
           {[{ id: "all", name: "Все фото" }, ...gallery].map((g) => {
             const on = filter === g.id;
@@ -61,7 +61,7 @@ export function GalleryGrid() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setFilter(g.id)}
-                className={`shrink-0 whitespace-nowrap rounded-full px-4 py-2.5 text-[15px] font-semibold transition-[background-color,color,box-shadow] duration-300 ${
+                className={`shrink-0 whitespace-nowrap rounded-full px-3.5 py-2 text-[14px] font-semibold sm:px-4 sm:py-2.5 sm:text-[15px] transition-[background-color,color,box-shadow] duration-300 ${
                   on ? "bg-violet text-black shadow-[0_0_24px_rgb(180_92_255/0.5)]" : "bg-surface-2/60 text-soft hover:text-ink"
                 }`}
               >
@@ -72,28 +72,35 @@ export function GalleryGrid() {
         </div>
       </div>
 
-      <div key={filter} className="mt-6 flex flex-col gap-[clamp(48px,7vw,96px)]">
+      <div key={filter} className="mt-3 flex flex-col gap-[clamp(24px,7vw,96px)] sm:mt-6">
         {groups.map((g, gi) => (
           <section key={g.id} aria-labelledby={`g-${g.id}`}>
-            <div className={`flex flex-col gap-2 md:flex-row md:items-end md:justify-between ${filter !== "all" ? "in-left" : ""}`}>
+            <div className={`flex flex-col gap-0.5 sm:gap-2 md:flex-row md:items-end md:justify-between ${filter !== "all" ? "in-left" : ""}`}>
               <Reveal as="h2" from="left" id={`g-${g.id}`}>
-                <span className="font-display text-[14px] text-soft">0{gallery.indexOf(g) + 1} </span>
                 {g.name}
               </Reveal>
-              <Reveal as="p" from="right" className="max-w-[46ch] text-soft">
+              <Reveal as="p" from="right" className="max-w-[46ch] text-[13px] leading-snug text-soft sm:text-body">
                 {g.text}
               </Reveal>
             </div>
-            <ul className={`mt-6 grid gap-3 ${g.photos.length === 1 ? "" : g.photos.length === 2 ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-[1fr_1fr_1.5fr]"}`}>
+            <ul className={`mt-2 grid grid-cols-2 gap-1.5 sm:mt-6 sm:gap-3 ${g.photos.length === 1 ? "md:grid-cols-1" : g.photos.length === 2 ? "md:grid-cols-[1.5fr_1fr]" : "md:grid-cols-[1fr_1fr_1.5fr]"}`}>
               {g.photos.map((p, i) => (
-                <Reveal as="li" key={p.src} from={(i + gi) % 2 ? "right" : "left"} order={i}>
+                <Reveal as="li" key={p.src} from={(i + gi) % 2 ? "right" : "left"} order={i} className={i === g.photos.length - 1 && g.photos.length % 2 === 1 ? "col-span-2 md:col-span-1" : ""}>
                   <button
                     type="button"
                     onClick={() => open(p)}
                     aria-label={`Открыть фото: ${p.alt}`}
-                    className={`frame group relative block w-full ${p.h > p.w ? "aspect-[3/4]" : g.photos.length === 1 ? "aspect-[16/9]" : "aspect-[3/2] md:h-full md:aspect-auto"}`}
+                    className={`frame group relative block w-full ${
+                      g.photos.length === 1
+                        ? "aspect-[16/9]"
+                        : i === g.photos.length - 1 && g.photos.length % 2 === 1
+                        ? "aspect-[16/9] md:h-full md:aspect-auto"
+                        : p.h > p.w
+                          ? "aspect-[3/4]"
+                          : "aspect-[3/4] md:h-full md:aspect-auto"
+                    }`}
                   >
-                    <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 60vw, 100vw" className="object-cover" />
+                    <Image src={p.src} alt={p.alt} fill sizes="(min-width: 768px) 60vw, 50vw" className="object-cover" />
                     <span className="absolute inset-x-0 bottom-0 z-[2] translate-y-full bg-gradient-to-t from-black/80 to-transparent p-4 text-left text-small opacity-0 transition-[transform,opacity] duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                       {p.alt}
                     </span>

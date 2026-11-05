@@ -271,7 +271,7 @@ export default function CheckoutPage() {
                 </ul>
                 <div className="mt-5 flex items-baseline justify-between border-t border-line pt-5">
                   <span className="font-semibold">К оплате</span>
-                  <span className="neon-violet font-display text-[30px] font-bold tabular-nums">{rub(total)}</span>
+                  <span className="neon-violet font-sans text-[30px] font-bold tabular-nums">{rub(total)}</span>
                 </div>
               </div>
             </aside>

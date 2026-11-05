@@ -36,13 +36,13 @@ export default function RulesPage() {
         <section className="wrap section" aria-labelledby="refuse-title">
           <Reveal
             from="zoom"
-            className="relative overflow-hidden rounded-tile bg-[linear-gradient(120deg,#2a0d1d,#1b1028_60%)] p-[clamp(24px,4vw,48px)] shadow-[inset_0_0_0_2px_#ff5c8a,0_0_60px_rgb(255_92_138/0.25)]"
+            className="relative overflow-hidden rounded-tile bg-[linear-gradient(120deg,#2a0d1d,#1b1028_60%)] p-[clamp(16px,4vw,48px)] shadow-[inset_0_0_0_2px_#ff5c8a,0_0_60px_rgb(255_92_138/0.25)]"
           >
-            <div className="flex flex-col gap-5 md:flex-row md:items-center md:gap-8">
-              <ShieldAlert className="size-12 shrink-0 text-[#ff8aa5] drop-shadow-[0_0_12px_#ff5c8a]" aria-hidden="true" />
+            <div className="flex items-start gap-3 md:items-center md:gap-8">
+              <ShieldAlert className="size-8 shrink-0 md:size-12 text-[#ff8aa5] drop-shadow-[0_0_12px_#ff5c8a]" aria-hidden="true" />
               <div>
                 <p className="eyebrow !text-[#ff8aa5]">Важно</p>
-                <h2 id="refuse-title" className="mt-2 text-[clamp(22px,2.4vw,32px)]">
+                <h2 id="refuse-title" className="text-[clamp(17px,2.4vw,30px)] leading-snug">
                   Администрация оставляет за собой право отказать в обслуживании лицам в состоянии алкогольного или
                   наркотического опьянения.
                 </h2>
@@ -60,12 +60,12 @@ export default function RulesPage() {
               Шесть простых пунктов
             </Reveal>
           </div>
-          <ul className="mt-8 grid gap-3 md:grid-cols-2">
+          <ul className="mt-3 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3">
             {rules.map((r, i) => (
-              <Reveal as="li" key={r.name} from={i % 2 ? "right" : "left"} order={Math.floor(i / 2) % 2} className="flex h-full flex-col gap-2 rounded-tile bg-surface p-5 shadow-[inset_0_0_0_1px_#1f1830]">
-                <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-violet">{r.tag}</p>
-                <h3 className="text-[19px]">{r.name}</h3>
-                <p className="text-small text-soft">{r.note}</p>
+              <Reveal as="li" key={r.name} from={i % 2 ? "right" : "left"} order={Math.floor(i / 2) % 2} className="flex h-full flex-col gap-1 rounded-tile bg-surface p-3.5 sm:gap-2 sm:p-5 shadow-[inset_0_0_0_1px_#1f1830]">
+                <p className="text-[12px] font-semibold text-violet sm:text-[13px]">{r.tag}</p>
+                <h3 className="text-[15px] leading-snug sm:text-[19px]">{r.name}</h3>
+                <p className="text-[12.5px] leading-snug text-soft sm:text-small">{r.note}</p>
               </Reveal>
             ))}
           </ul>
@@ -80,13 +80,13 @@ export default function RulesPage() {
               Раньше эти строки были в разделе меню «Прочее». Надеемся, они вам не пригодятся.
             </Reveal>
           </div>
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-3 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3 lg:grid-cols-3">
             {fees.map((f, i) => (
               <Reveal as="li" key={f.name} from={i % 3 === 0 ? "left" : i % 3 === 2 ? "right" : "up"} order={i % 3}>
-                <article className="flex h-full flex-col gap-2 rounded-tile bg-surface p-5 shadow-[inset_0_0_0_1px_#1f1830] transition-[box-shadow,transform] duration-500 hover:-translate-y-1 hover:shadow-[inset_0_0_0_1px_rgb(255_176_59/0.5)]">
-                  <h3 className="text-[18px] leading-snug">{f.name}</h3>
-                  {f.note && <p className="text-small text-soft">{f.note}</p>}
-                  <p className="mt-auto pt-3 font-display text-[22px] font-bold tabular-nums">
+                <article className="flex h-full flex-col gap-1 rounded-tile bg-surface p-3.5 sm:gap-2 sm:p-5 shadow-[inset_0_0_0_1px_#1f1830] transition-[box-shadow,transform] duration-500 hover:-translate-y-1 hover:shadow-[inset_0_0_0_1px_rgb(255_176_59/0.5)]">
+                  <h3 className="text-[15px] leading-snug sm:text-[18px]">{f.name}</h3>
+                  {f.note && <p className="text-[12.5px] leading-snug text-soft sm:text-small">{f.note}</p>}
+                  <p className="mt-auto pt-3 font-sans text-[22px] font-bold tabular-nums">
                     <span className="neon-ochre">{rub(f.price)}</span>
                   </p>
                 </article>

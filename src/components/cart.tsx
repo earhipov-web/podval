@@ -252,7 +252,7 @@ function CartDrawer() {
             <div className="border-t border-line px-5 pb-6 pt-4">
               <div className="flex items-baseline justify-between">
                 <span className="text-soft">Итого</span>
-                <span className="font-display text-[26px] tabular-nums">{rub(total)}</span>
+                <span className="font-sans text-[26px] font-bold tabular-nums">{rub(total)}</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-2">
                 <Link href="/cart" onClick={() => setOpen(false)} className="btn btn-ghost">

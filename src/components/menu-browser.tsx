@@ -80,12 +80,12 @@ export function MenuBrowser() {
         </div>
       </div>
 
-      <section id="menu-panel" role="tabpanel" aria-labelledby="cat-title" key={cat.id} className="cat-panel pt-8">
+      <section id="menu-panel" role="tabpanel" aria-labelledby="cat-title" key={cat.id} className="cat-panel pt-4 sm:pt-8">
         <div className="flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
           <h2 id="cat-title">{cat.name}</h2>
           <p className="max-w-[46ch] text-soft">{cat.lead}</p>
         </div>
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="mt-3 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3 lg:grid-cols-3 xl:grid-cols-4">
           {cat.items.map((item, i) => (
             <li
               key={item.id}
@@ -115,7 +115,7 @@ export function MenuBrowser() {
             </span>
             Корзина · {count}
           </span>
-          <span className="font-display text-[18px] font-bold tabular-nums">{rub(total)}</span>
+          <span className="font-sans text-[18px] font-bold tabular-nums">{rub(total)}</span>
         </button>
       </div>
     </div>

@@ -1,21 +1,31 @@
 import type { Metadata, Viewport } from "next";
-import { Onest, Unbounded } from "next/font/google";
+import { Geologica, Rubik_Spray_Paint, Unbounded } from "next/font/google";
 import { CartProvider } from "@/components/cart";
 import { PageTransition } from "@/components/page-transition";
 import { SiteNav } from "@/components/site-nav";
 import "./globals.css";
 
-const text = Onest({
+// Text, prices and numbers: a grotesque drawn with Cyrillic in mind
+const text = Geologica({
   variable: "--font-text",
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
+// Section headings, card titles, the marquee: wide and heavy
 const display = Unbounded({
   variable: "--font-display",
   subsets: ["latin", "cyrillic"],
   weight: ["500", "700", "800"],
+  display: "swap",
+});
+
+// Only the main heading of each page: spray-can letters, like the graffiti on the bar's walls
+const spray = Rubik_Spray_Paint({
+  variable: "--font-spray",
+  subsets: ["latin", "cyrillic"],
+  weight: "400",
   display: "swap",
 });
 
@@ -36,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ru" className={`${text.variable} ${display.variable}`}>
+    <html lang="ru" className={`${text.variable} ${display.variable} ${spray.variable}`}>
       <body className="antialiased">
         <CartProvider>
           <SiteNav />

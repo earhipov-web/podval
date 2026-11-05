@@ -38,19 +38,19 @@ export default function BookingPage() {
       />
       <main>
         <section id="booking" aria-labelledby="booking-title" className="wrap section scroll-mt-20">
-          <div className="mb-8 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+          <div className="mb-3 flex flex-col gap-2 sm:mb-8 sm:gap-4 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
             <Reveal as="h2" from="left" id="booking-title">
               Бронь стола
             </Reveal>
-            <ol className="grid gap-3 sm:grid-cols-3 lg:max-w-[740px]">
+            <ol className="grid grid-cols-3 gap-2 sm:gap-3 lg:max-w-[740px]">
               {steps.map((s, i) => (
-                <Reveal as="li" key={s.title} from="right" order={i} className="flex gap-3">
-                  <span className="grid size-8 shrink-0 place-items-center rounded-full bg-surface-2 text-small font-bold text-violet shadow-[inset_0_0_0_1px_#2e2540]">
+                <Reveal as="li" key={s.title} from="right" order={i} className="flex flex-col gap-1 sm:flex-row sm:gap-3">
+                  <span className="grid size-6 text-[12px] sm:size-8 shrink-0 place-items-center rounded-full bg-surface-2 text-small font-bold text-violet shadow-[inset_0_0_0_1px_#2e2540]">
                     {i + 1}
                   </span>
                   <div>
-                    <p className="font-semibold">{s.title}</p>
-                    <p className="text-small text-soft">{s.text}</p>
+                    <p className="text-[12.5px] font-semibold leading-snug sm:text-body">{s.title}</p>
+                    <p className="hidden text-small text-soft sm:block">{s.text}</p>
                   </div>
                 </Reveal>
               ))}
@@ -63,14 +63,16 @@ export default function BookingPage() {
           <Reveal as="h2" from="left" id="notes-title">
             Что важно знать
           </Reveal>
-          <ul className="mt-8 grid gap-3 md:grid-cols-3">
+          <ul className="mt-3 grid gap-2 sm:mt-8 sm:gap-3 md:grid-cols-3">
             {notes.map((r, i) => (
-              <Reveal as="li" key={r.title} from={i === 0 ? "left" : i === 2 ? "right" : "up"} className="rounded-tile bg-surface p-6 shadow-[inset_0_0_0_1px_#1f1830]">
-                <span className="grid size-11 place-items-center rounded-full bg-surface-2 text-violet">
+              <Reveal as="li" key={r.title} from={i === 0 ? "left" : i === 2 ? "right" : "up"} className="flex gap-3 rounded-tile bg-surface p-3.5 shadow-[inset_0_0_0_1px_#1f1830] sm:block sm:p-6">
+                <span className="grid size-9 shrink-0 place-items-center rounded-full bg-surface-2 text-violet sm:size-11">
                   <r.icon className="size-5" aria-hidden="true" />
                 </span>
-                <h3 className="mt-4">{r.title}</h3>
-                <p className="mt-1 text-small text-soft">{r.text}</p>
+                <div>
+                  <h3 className="text-[16px] sm:mt-4 sm:text-h3">{r.title}</h3>
+                  <p className="mt-0.5 text-[13px] leading-snug text-soft sm:mt-1 sm:text-small">{r.text}</p>
+                </div>
               </Reveal>
             ))}
           </ul>

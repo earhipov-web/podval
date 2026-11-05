@@ -43,14 +43,14 @@ export function MenuCard({ item }: { item: MenuItem }) {
           />
         </div>
       ) : null}
-      <div className="flex flex-1 flex-col gap-2 p-4">
+      <div className="flex flex-1 flex-col gap-1 p-3 sm:gap-2 sm:p-4">
         {item.tag && (
-          <p className={`text-[12px] font-semibold uppercase tracking-[0.16em] ${TAG_TONE[item.tag] ?? "text-violet"}`}>{item.tag}</p>
+          <p className={`text-[12px] font-semibold sm:text-[13px] ${TAG_TONE[item.tag] ?? "text-violet"}`}>{item.tag}</p>
         )}
-        <h3 className="text-[18px] leading-snug">{item.name}</h3>
-        {item.note && <p className="text-small text-soft">{item.note}</p>}
-        <div className="mt-auto flex items-center justify-between gap-3 pt-3">
-          <span className="whitespace-nowrap font-display text-[20px] font-bold tabular-nums">{rub(item.price)}</span>
+        <h3 className="text-[15px] leading-snug sm:text-[18px]">{item.name}</h3>
+        {item.note && <p className="line-clamp-2 text-[12.5px] leading-snug text-soft sm:line-clamp-none sm:text-small">{item.note}</p>}
+        <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-2 sm:gap-3 sm:pt-3">
+          <span className="whitespace-nowrap font-sans text-[17px] font-bold tabular-nums sm:text-[20px]">{rub(item.price)}</span>
           <AddToCart item={item} />
         </div>
       </div>

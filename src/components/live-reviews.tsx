@@ -26,11 +26,11 @@ function Stars({ n, className }: { n: number; className: string }) {
 
 function ReviewCard({ r }: { r: Review }) {
   const [open, setOpen] = useState(false);
-  const long = r.text.length > 240;
+  const long = r.text.length > 200;
   return (
-    <article className="flex h-full flex-col gap-4 rounded-tile bg-surface p-5 shadow-[inset_0_0_0_1px_#1f1830]">
+    <article className="flex h-full flex-col gap-3 rounded-tile bg-surface p-4 shadow-[inset_0_0_0_1px_#1f1830] sm:gap-4 sm:p-5">
       <Stars n={r.rating} className="size-4 fill-violet text-violet" />
-      <blockquote className={`flex-1 whitespace-pre-line text-[15px] leading-relaxed [overflow-wrap:anywhere] ${long && !open ? "line-clamp-6" : ""}`}>{r.text}</blockquote>
+      <blockquote className={`flex-1 whitespace-pre-line text-[15px] leading-relaxed [overflow-wrap:anywhere] ${long && !open ? "line-clamp-5 sm:line-clamp-6" : ""}`}>{r.text}</blockquote>
       {long && (
         <button type="button" onClick={() => setOpen((v) => !v)} className="self-start text-small text-violet underline decoration-violet/50 underline-offset-4 hover:text-ink">
           {open ? "Свернуть" : "Читать полностью"}
@@ -91,36 +91,37 @@ export function LiveReviews() {
   }, []);
 
   return (
-    <div className="wrap grid gap-8 lg:grid-cols-12">
-      <Reveal from="left" className="lg:col-span-4">
-        <p className="eyebrow">Отзывы</p>
-        <h2 id="reviews-title" className="mt-3">
-          Что говорят гости
-        </h2>
-        <div className="mt-8 rounded-tile bg-surface p-6 shadow-[inset_0_0_0_1px_#2e2540]">
+    <div className="grid gap-3 sm:gap-8 lg:mx-auto lg:max-w-[1240px] lg:grid-cols-12 lg:px-[var(--gutter)]">
+      <Reveal from="left" className="wrap lg:col-span-4 lg:px-0">
+        <h2 id="reviews-title">Что говорят гости</h2>
+        <div className="mt-3 rounded-tile bg-surface p-4 shadow-[inset_0_0_0_1px_#2e2540] sm:p-6 lg:mt-8">
           <p className="flex items-center gap-3">
-            <span className="neon-ochre font-display text-[56px] font-bold leading-none">{ratingFmt(data.rating)}</span>
+            <span className="neon-ochre font-sans text-[40px] font-bold leading-none sm:text-[56px]">{ratingFmt(data.rating)}</span>
             <Stars n={Math.round(data.rating)} className="size-5 fill-ochre text-ochre" />
           </p>
-          <p className="mt-3 text-soft">
+          <p className="mt-2 text-small text-soft sm:mt-3 sm:text-body">
             {data.ratings} {plural(data.ratings, "оценка", "оценки", "оценок")} и {data.reviewsCount}{" "}
             {plural(data.reviewsCount, "отзыв", "отзыва", "отзывов")} на Яндекс Картах.
           </p>
-          <p className="mt-4 flex items-center gap-2 text-small text-soft" aria-live="polite">
+          <p className="mt-2 flex items-center gap-2 text-[13px] text-soft sm:mt-4 sm:text-small" aria-live="polite">
             <span className="relative flex size-2.5">
               {live && <span className="absolute inset-0 animate-ping rounded-full bg-[#3dff8a] opacity-70" />}
               <span className={`relative size-2.5 rounded-full ${live ? "bg-[#3dff8a]" : "bg-soft/50"}`} />
             </span>
             {live && checkedAt ? `Живые отзывы с Яндекс Карт · обновлено в ${timeFmt.format(checkedAt)}` : "Свежие отзывы с Яндекс Карт"}
           </p>
-          <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost mt-6 w-full">
+          <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer" className="btn btn-ghost mt-3 !min-h-10 w-full text-small sm:mt-6 sm:!min-h-12 sm:text-body">
             Все отзывы на Яндекс Картах
           </a>
         </div>
       </Reveal>
-      <ul key={data.reviews.map((r) => r.id).join()} className="cat-panel grid gap-3 sm:grid-cols-2 lg:col-span-8">
+      <ul
+        key={data.reviews.map((r) => r.id).join()}
+        aria-label="Отзывы, листаются вбок"
+        className="cat-panel flex snap-x snap-mandatory gap-2 overflow-x-auto px-[var(--gutter)] pb-2 [scrollbar-width:none] sm:mx-auto sm:grid sm:w-full sm:max-w-[1240px] sm:grid-cols-2 sm:gap-3 sm:overflow-visible sm:pb-0 lg:col-span-8 lg:mx-0 lg:px-0"
+      >
         {data.reviews.map((r, i) => (
-          <Reveal as="li" key={r.id} from={i % 2 ? "right" : "up"} order={i % 2}>
+          <Reveal as="li" key={r.id} from={i % 2 ? "right" : "up"} order={i % 2} className="w-[82%] shrink-0 snap-center sm:w-auto">
             <ReviewCard r={r} />
           </Reveal>
         ))}

@@ -8,27 +8,26 @@ import { Reveal } from "./reveal";
 export function Contacts({ withMap = true }: { withMap?: boolean }) {
   return (
     <section id="contacts" aria-labelledby="contacts-title" className="wrap section scroll-mt-20">
-      <div className="grid gap-[var(--gutter)] lg:grid-cols-12">
-        <div className={`flex flex-col gap-6 ${withMap ? "lg:col-span-5" : "lg:col-span-12"}`}>
+      <div className="grid gap-2 sm:gap-[var(--gutter)] lg:grid-cols-12">
+        <div className={`flex flex-col gap-3 sm:gap-6 ${withMap ? "lg:col-span-5" : "lg:col-span-12"}`}>
           <Reveal from="left">
-            <p className="eyebrow">Контакты</p>
-            <h2 id="contacts-title" className="mt-3">
+            <h2 id="contacts-title">
               Спускайтесь в <span className="neon-violet">подвал</span>
             </h2>
           </Reveal>
-          <Reveal as="ul" from="left" order={1} className={withMap ? "flex flex-col gap-2" : "grid gap-2 md:grid-cols-3"}>
-            <li className="flex gap-4 rounded-tile bg-surface p-5">
-              <MapPin className="mt-0.5 size-5 shrink-0 text-violet" aria-hidden="true" />
+          <Reveal as="ul" from="left" order={1} className={withMap ? "grid grid-cols-2 gap-2 lg:flex lg:flex-col" : "grid grid-cols-2 gap-2 md:grid-cols-3"}>
+            <li className="flex gap-2.5 rounded-tile bg-surface p-3 text-small sm:gap-4 sm:p-5 sm:text-body">
+              <MapPin className="mt-0.5 size-4 shrink-0 text-violet sm:size-5" aria-hidden="true" />
               <div>
                 <p className="font-semibold">{club.addressFull}</p>
                 <a href={club.googleRoute} target="_blank" rel="noopener noreferrer" className="text-small text-soft underline decoration-violet underline-offset-4 hover:text-ink">
-                  Построить маршрут в Google Картах
+                  Маршрут<span className="hidden sm:inline"> в Google Картах</span>
                 </a>
               </div>
             </li>
-            <li className="flex gap-4 rounded-tile bg-surface p-5">
-              <Clock className="mt-0.5 size-5 shrink-0 text-ochre" aria-hidden="true" />
-              <dl className="grid grid-cols-[auto_1fr] gap-x-5 gap-y-1">
+            <li className="flex gap-2.5 rounded-tile bg-surface p-3 text-small sm:gap-4 sm:p-5 sm:text-body">
+              <Clock className="mt-0.5 size-4 shrink-0 text-ochre sm:size-5" aria-hidden="true" />
+              <dl className="grid grid-cols-1 gap-x-5 gap-y-0.5 sm:grid-cols-[auto_1fr] sm:gap-y-1">
                 {hours.map((h) => (
                   <div key={h.days} className="contents">
                     <dt className="text-soft">{h.days}</dt>
@@ -39,9 +38,9 @@ export function Contacts({ withMap = true }: { withMap?: boolean }) {
                 ))}
               </dl>
             </li>
-            <li className="flex gap-4 rounded-tile bg-surface p-5">
-              <Phone className="mt-0.5 size-5 shrink-0 text-blue" aria-hidden="true" />
-              <div className="flex flex-col gap-3">
+            <li className="col-span-2 flex gap-2.5 rounded-tile bg-surface p-3 sm:gap-4 sm:p-5 md:col-span-1">
+              <Phone className="mt-1 size-4 shrink-0 text-blue sm:mt-0.5 sm:size-5" aria-hidden="true" />
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-2 sm:flex-col sm:items-start sm:gap-3">
                 <a href={club.phoneHref} className="text-lead font-semibold tabular-nums hover:text-violet">
                   {club.phone}
                 </a>
@@ -50,7 +49,8 @@ export function Contacts({ withMap = true }: { withMap?: boolean }) {
                     <MessageCircle className="size-4" aria-hidden="true" /> WhatsApp
                   </a>
                   <a href={club.telegram} target="_blank" rel="noopener noreferrer" className="btn btn-ghost !min-h-10 text-small">
-                    <Send className="size-4" aria-hidden="true" /> {club.telegramName}
+                    <Send className="size-4" aria-hidden="true" /> <span className="sm:hidden">Telegram</span>
+                    <span className="hidden sm:inline">{club.telegramName}</span>
                   </a>
                 </div>
               </div>
@@ -58,7 +58,7 @@ export function Contacts({ withMap = true }: { withMap?: boolean }) {
           </Reveal>
         </div>
         {withMap && (
-          <Reveal from="right" order={1} className="frame min-h-[360px] lg:col-span-7">
+          <Reveal from="right" order={1} className="frame min-h-[210px] sm:min-h-[360px] lg:col-span-7">
             {/* shows while the map loads, or if a browser blocks the map frame */}
             <a
               href={club.googleMap}
@@ -88,15 +88,15 @@ export function Contacts({ withMap = true }: { withMap?: boolean }) {
 export function SiteFooter() {
   return (
     <footer className="mt-[var(--section)] border-t border-line bg-surface/40">
-      <div className="wrap grid gap-8 py-12 md:grid-cols-12">
+      <div className="wrap grid gap-5 py-7 sm:gap-8 sm:py-12 md:grid-cols-12">
         <div className="md:col-span-5">
-          <Image src="/logo.png" alt="PODVAL" width={441} height={176} className="h-12 w-auto" />
-          <p className="mt-4 max-w-[38ch] text-small text-soft">
+          <Image src="/logo.png" alt="PODVAL" width={441} height={176} className="h-9 w-auto sm:h-12" />
+          <p className="mt-2 hidden max-w-[38ch] text-small text-soft sm:mt-4 sm:block">
             {club.kind} в центре Казани: кальяны, бар, PlayStation 5, DJ-сеты и караоке. Только для гостей старше 18 лет.
           </p>
         </div>
         <nav aria-label="Разделы сайта" className="md:col-span-3">
-          <ul className="grid grid-cols-2 gap-x-4 gap-y-2 text-small md:grid-cols-1">
+          <ul className="grid grid-cols-3 gap-x-4 gap-y-2 text-small md:grid-cols-1">
             {links.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="text-soft transition-colors hover:text-ink">
@@ -110,8 +110,8 @@ export function SiteFooter() {
           <a href={club.phoneHref} className="font-semibold hover:text-violet">
             {club.phone}
           </a>
-          <p className="text-soft">{club.addressFull}</p>
-          <p className="mt-4 text-[13px] text-soft/70">
+          <p className="hidden text-soft sm:block">{club.addressFull}</p>
+          <p className="mt-2 text-[12px] text-soft/70 sm:mt-4 sm:text-[13px]">
             Чрезмерное употребление алкоголя и курение вредят вашему здоровью. © {new Date().getFullYear()} PODVAL
           </p>
         </div>
