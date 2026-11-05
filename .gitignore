@@ -1,8 +1,29 @@
+# dependencies and builds
 node_modules
 .next
 out
+build
 *.tsbuildinfo
-.claude
-.vercel
+next-env.d.ts
+
+# secrets: environment files and keys never go to GitHub
 .env*
+*.pem
+*.key
+
+# local links to hosting accounts and tools
+.vercel
 .netlify
+.claude
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode
+.idea
