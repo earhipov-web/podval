@@ -2,9 +2,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Gamepad2, Martini, Mic2, Sofa, Star, Users, User } from "lucide-react";
 import { Contacts, SiteFooter } from "@/components/footer";
+import { LiveReviews } from "@/components/live-reviews";
 import { AddToCart } from "@/components/menu-card";
 import { Reveal } from "@/components/reveal";
-import { club, deals, itemById, reviews, rub } from "@/lib/data";
+import { club, deals, itemById, rub } from "@/lib/data";
 
 const zones = [
   {
@@ -244,55 +245,7 @@ export default function Home() {
 
         {/* ---------- Reviews ---------- */}
         <section aria-labelledby="reviews-title" className="section">
-          <div className="wrap grid gap-8 lg:grid-cols-12">
-            <Reveal from="left" className="lg:col-span-4">
-              <p className="eyebrow">Отзывы</p>
-              <h2 id="reviews-title" className="mt-3">
-                Что говорят гости
-              </h2>
-              <div className="mt-8 rounded-tile bg-surface p-6 shadow-[inset_0_0_0_1px_#2e2540]">
-                <p className="flex items-center gap-3">
-                  <span className="neon-ochre font-display text-[56px] font-bold leading-none">{club.rating}</span>
-                  <span className="flex gap-0.5" aria-hidden="true">
-                    {Array.from({ length: 5 }, (_, i) => (
-                      <Star key={i} className="size-5 fill-ochre text-ochre" />
-                    ))}
-                  </span>
-                </p>
-                <p className="mt-3 text-soft">
-                  {club.ratings} оценки и {club.reviews} отзывов на Яндекс Картах. Атмосферу хвалят 100% гостей.
-                </p>
-                <a href={club.yandexReviews} target="_blank" rel="noopener noreferrer" className="btn btn-ghost mt-6 w-full">
-                  Все отзывы на Яндекс Картах
-                </a>
-              </div>
-            </Reveal>
-            <ul className="grid gap-3 sm:grid-cols-2 lg:col-span-8">
-              {reviews.slice(0, 6).map((r, i) => (
-                <Reveal
-                  as="li"
-                  key={r.name}
-                  from={i % 2 ? "right" : "up"}
-                  order={i % 2}
-                  className="flex flex-col gap-4 rounded-tile bg-surface p-5 shadow-[inset_0_0_0_1px_#1f1830]"
-                >
-                  <span className="flex gap-0.5" role="img" aria-label="5 из 5">
-                    {Array.from({ length: 5 }, (_, k) => (
-                      <Star key={k} className="size-4 fill-violet text-violet" aria-hidden="true" />
-                    ))}
-                  </span>
-                  <blockquote className="flex-1 text-[15px] leading-relaxed">«{r.text}»</blockquote>
-                  <p className="flex items-center gap-3 text-small">
-                    <span className="grid size-9 place-items-center rounded-full bg-violet-deep font-semibold text-ink">{r.name[0]}</span>
-                    <span>
-                      <span className="block font-semibold">{r.name}</span>
-                      <span className="text-soft">{r.date}</span>
-                    </span>
-                  </p>
-                </Reveal>
-              ))}
-            </ul>
-          </div>
+          <LiveReviews />
         </section>
 
         <Contacts />

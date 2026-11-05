@@ -1,0 +1,8 @@
+# Netlify builds the Next.js app with its Next.js runtime (detected automatically):
+# pages are static, /api/reviews runs as a function and is cached by the CDN for 30 minutes.
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NODE_VERSION = "22"
