@@ -62,14 +62,19 @@ export default function Home() {
                 Здесь <span className="neon-violet flicker">никогда</span> не&nbsp;бывает скучно
               </h1>
 
-              {/* phones and tablets: the same photo collage as on wide screens, right under the heading */}
-              <div className="relative mx-auto mt-6 aspect-[6/7] w-full max-w-[520px] lg:hidden">
-                <div className="frame in-right absolute right-0 top-0 h-[71%] w-[78%]" style={{ ["--i" as string]: 2 }}>
-                  <Image src="/photos/bar-sign.webp" alt="Неоновая вывеска bar над барной стойкой" fill priority sizes="(min-width: 640px) 400px, 78vw" className="object-cover" />
-                </div>
-                <div className="frame in-right absolute bottom-0 left-0 h-[45%] w-[62%] shadow-[0_30px_60px_rgb(0_0_0/0.6)]" style={{ ["--i" as string]: 3 }}>
-                  <Image src="/photos/drinks.webp" alt="Три ярких коктейля на барной стойке" fill priority sizes="(min-width: 640px) 320px, 62vw" className="object-cover" />
-                </div>
+              {/* phones and tablets: one large photo of the bar right under the heading */}
+              <div
+                className="frame in-right relative mx-auto mt-5 aspect-square w-full max-w-[520px] shadow-[0_24px_60px_-20px_rgb(180_92_255/0.45)] lg:hidden"
+                style={{ ["--i" as string]: 2 }}
+              >
+                <Image
+                  src="/photos/bar-sign.webp"
+                  alt="Неоновая вывеска bar над барной стойкой"
+                  fill
+                  priority
+                  sizes="(min-width: 640px) 520px, 100vw"
+                  className="object-cover object-[50%_30%]"
+                />
               </div>
               <p className="lead in-left mt-6 max-w-[48ch] text-soft" style={{ ["--i" as string]: 2 }}>
                 Бар с неоновой вывеской, уютный гостевой зал, PlayStation 5, DJ-сеты и караоке. Заходите одни или
