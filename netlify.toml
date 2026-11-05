@@ -7,6 +7,11 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# The Next.js adapter is declared explicitly: without it a build from GitHub publishes the raw
+# .next folder and every page answers 404.
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
 # Security headers for everything Netlify serves straight from its CDN (static pages, scripts,
 # pictures). They match next.config.ts; keep the two in step when you change the CSP.
 [[headers]]
